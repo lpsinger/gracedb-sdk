@@ -16,7 +16,7 @@ def coinc_xml_bytes():
 @pytest.fixture(scope='module')
 def client():
     try:
-        client = Client('https://gracedb-test.ligo.org/api/', fail_noauth=True)
+        client = Client('https://gracedb-test.ligo.org/api/', fail_if_noauth=True)
     except ValueError:
         pytest.skip('no GraceDB credentials found')
     yield client
@@ -32,8 +32,7 @@ def client():
     [None, []],
     [[], []]
 ])
-def test_events_create(client, socket_enabled, coinc_xml_bytes,
-                       labels_in, labels_out):
+def test_events_create(client, coinc_xml_bytes, labels_in, labels_out):
     result = client.events.create(
         filename='coinc.xml', filecontents=coinc_xml_bytes,
         group='Test', pipeline='gstlal', labels=labels_in)
@@ -41,7 +40,7 @@ def test_events_create(client, socket_enabled, coinc_xml_bytes,
 
 
 @pytest.fixture
-def events_create(client, socket_enabled, coinc_xml_bytes):
+def events_create(client, coinc_xml_bytes):
     return client.events.create(
         filename='coinc.xml', filecontents=coinc_xml_bytes,
         group='Test', pipeline='gstlal')
@@ -215,7 +214,7 @@ def test_superevents_update(client, superevents_create):
 
 
 @pytest.fixture
-def events_create_2(client, socket_enabled, coinc_xml_bytes):
+def events_create_2(client, coinc_xml_bytes):
     return client.events.create(
         filename='coinc.xml', filecontents=coinc_xml_bytes,
         group='Test', pipeline='gstlal')

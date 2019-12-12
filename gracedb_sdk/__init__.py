@@ -1,10 +1,6 @@
-from requests.sessions import Session
+from ligo.requests import Session
 
 from .api import API
-from .auth import SessionAuthMixin
-from .errors import SessionErrorMixin
-from .file import SessionFileMixin
-from .user_agent import SessionUserAgentMixin
 
 from ._version import get_versions
 __version__ = get_versions()['version']
@@ -13,8 +9,7 @@ del get_versions
 __all__ = ('Client',)
 
 
-class Client(API, SessionAuthMixin, SessionErrorMixin, SessionFileMixin,
-             SessionUserAgentMixin, Session):
+class Client(API, Session):
     """GraceDB client session.
 
     Parameters
@@ -31,7 +26,7 @@ class Client(API, SessionAuthMixin, SessionErrorMixin, SessionFileMixin,
         Password for basic auth.
     force_noauth : bool, default=False
         If true, then do not use any authentication at all.
-    fail_noauth : bool, default=False
+    fail_if_noauth : bool, default=False
         If true, then raise an exception if authentication credentials are
         not provided.
     cert_reload : bool, default=False
@@ -68,7 +63,7 @@ class Client(API, SessionAuthMixin, SessionErrorMixin, SessionFileMixin,
         in the environment variable :envvar:`NETRC`, and look for a username
         and password matching the hostname in the URL.
 
-    6.  If the :obj:`fail_noauth` keyword argument is true, and no
+    6.  If the :obj:`fail_if_noauth` keyword argument is true, and no
         authentication source was found, then raise a :class:`ValueError`.
 
     The following methods are supported for events:

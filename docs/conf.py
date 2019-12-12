@@ -96,7 +96,7 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-autodoc_mock_imports = ['cryptography', 'requests', 'safe_netrc']
+autodoc_mock_imports = ['ligo']
 for mod in []:
     try:
         importlib.import_module(mod)
@@ -197,6 +197,7 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
+    'ligo-requests': ('https://ligo-requests.readthedocs.io/en/latest/', None),
     'python': ('https://docs.python.org/3', None),
     'requests': ('https://requests.readthedocs.io/en/master/', None)
 }
