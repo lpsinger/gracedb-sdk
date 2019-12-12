@@ -16,7 +16,8 @@ def coinc_xml_bytes():
 @pytest.fixture(scope='module')
 def client():
     try:
-        client = Client('https://gracedb-test.ligo.org/api/', fail_if_noauth=True)
+        client = Client('https://gracedb-test.ligo.org/api/',
+                        fail_if_noauth=True)
     except ValueError:
         pytest.skip('no GraceDB credentials found')
     yield client
