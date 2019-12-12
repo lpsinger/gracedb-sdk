@@ -7,6 +7,9 @@ Changelog
 -   Factor out generic HTTP requests support into a separate package,
     ligo-requests.
 
+-   Rename ``fail_noauth`` keyword argument to ``fail_if_noauth`` for
+    consistency with gracedb-client.
+
 0.0.1 (2019-12-08)
 ------------------
 
