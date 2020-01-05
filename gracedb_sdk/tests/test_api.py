@@ -3,14 +3,19 @@ import pkgutil
 import os
 
 from requests.exceptions import HTTPError
+from requests.status_codes import codes
 import pytest
 
 from .. import Client
 
 
+def get_coinc_xml_bytes():
+    return pkgutil.get_data(__name__, os.path.join('data/coinc.xml'))
+
+
 @pytest.fixture
 def coinc_xml_bytes():
-    return pkgutil.get_data(__name__, os.path.join('data/coinc.xml'))
+    return get_coinc_xml_bytes()
 
 
 @pytest.fixture(scope='module')
@@ -20,7 +25,25 @@ def client():
                         fail_if_noauth=True)
     except ValueError:
         pytest.skip('no GraceDB credentials found')
+
+    # Do test upload to see if we have permissions.
+    try:
+        event = client.events.create(
+            filename='coinc.xml', filecontents=get_coinc_xml_bytes(),
+            group='Test', pipeline='gstlal')
+        graceid = event['graceid']
+        superevent = client.superevents.create(
+            preferred_event=graceid, t_0=1e9, t_start=1e9, t_end=1e9)
+        superevent_id = superevent['superevent_id']
+        client.superevents[superevent_id].expose()
+    except HTTPError as e:
+        if e.response.status_code == codes.FORBIDDEN:
+            pytest.skip('GraceDB credentials not authorized for gracedb-test')
+        else:
+            raise
+
     yield client
+
     client.close()
 
 
