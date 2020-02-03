@@ -197,7 +197,8 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    'requests-gracedb': ('https://requests-gracedb.readthedocs.io/en/latest/', None),
+    'requests-gracedb': ('https://requests-gracedb.readthedocs.io/en/latest/',
+                         None),
     'python': ('https://docs.python.org/3', None),
     'requests': ('https://requests.readthedocs.io/en/master/', None)
 }
