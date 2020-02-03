@@ -14,8 +14,6 @@ class BaseLogs(HasChildResources):
     def create_or_update(self, key, *,
                          filename=None, filecontents=None, tags=None,
                          **kwargs):
-        data = (*field_collection('tagname', tags),
-                *kwargs.items())
         # FIXME: gracedb server does not support form-encoded input
         # if there is no file!
         if filename is None and filecontents is None:
