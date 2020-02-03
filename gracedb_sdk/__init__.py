@@ -1,4 +1,4 @@
-from ligo.requests import Session
+from requests_gracedb import Session
 
 from .api import API
 

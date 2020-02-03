@@ -7,6 +7,8 @@ Changelog
 -   Skip unit tests if the user's X.509 certificate is not authorized for
     gracedb-test.ligo.org.
 
+-   Track rename of ligo-requests to requests-gracedb.
+
 0.0.2 (2019-12-12)
 ------------------
 
