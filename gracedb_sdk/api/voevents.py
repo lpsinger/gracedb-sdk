@@ -1,4 +1,4 @@
-from .base import Resource
+from .base import Mutable, Resource
 
 
 VOEVENT_TYPES = {'preliminary': 'PR',
@@ -10,7 +10,7 @@ VOEVENT_TYPES = {'preliminary': 'PR',
 # FIXME: events have a 'event/' resource whereas superevents have 'events/'.
 # Combine BaseVOEvents, EventVOEvents, and SupereventVOEvents into a single
 # VOEvents class once this inconsistency has been fixed.
-class BaseVOEvents(Resource):
+class BaseVOEvents(Mutable, Resource):
 
     def create_or_update(self, key, *, voevent_type=None, coinc_comment=None,
                          **kwargs):

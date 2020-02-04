@@ -14,6 +14,18 @@ class Resource:
         if path is not None:
             self.url = join(self.url, str(path))
 
+    def get(self, **kwargs):
+        return self.session.get(self.url, **kwargs).json()
+
+
+class Deletable:
+
+    def delete(self, key):
+        self.session.delete(join(self.url, str(key)))
+
+
+class Mutable:
+
     def create_or_update(self, key, **kwargs):
         if key is None:
             return self.session.post(self.url, **kwargs).json()
@@ -26,17 +38,8 @@ class Resource:
     def update(self, key, **kwargs):
         return self.create_or_update(key, **kwargs)
 
-    def get(self, **kwargs):
-        return self.session.get(self.url, **kwargs).json()
 
-
-class Deletable(Resource):
-
-    def delete(self, key):
-        self.session.delete(join(self.url, str(key)))
-
-
-class ResourceMapping(Resource):
+class Mapping:
 
     def __getitem__(self, key):
         return self.mapped_class(self, key)

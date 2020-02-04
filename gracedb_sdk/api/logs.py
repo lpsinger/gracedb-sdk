@@ -1,4 +1,4 @@
-from .base import ResourceMapping
+from .base import Mapping, Mutable, Resource
 from .log import EventLog, SupereventLog
 from .util import field_collection, str_or_collection
 
@@ -6,7 +6,7 @@ from .util import field_collection, str_or_collection
 # FIXME: events have a 'log/' resource whereas superevents have 'logs/'.
 # Combine BaseLogs, EventLogs, and SupereventLogs into a single Logs class
 # once this inconsistency has been fixed.
-class BaseLogs(ResourceMapping):
+class BaseLogs(Mapping, Mutable, Resource):
 
     def get(self, **kwargs):
         return super().get(**kwargs)['log']

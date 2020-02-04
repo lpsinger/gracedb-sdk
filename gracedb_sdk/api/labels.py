@@ -1,10 +1,10 @@
-from .base import Deletable
+from .base import Deletable, Mutable, Resource
 
 
 # FIXME: GraceDB expects different HTTP methods to write labels for events vs.
 # superevents! Replace BaseLabels, EventLabels, SupereventLabels with a single
 # Labels class once this is fixed.
-class BaseLabels(Deletable):
+class BaseLabels(Deletable, Mutable, Resource):
 
     path = 'labels/'
 

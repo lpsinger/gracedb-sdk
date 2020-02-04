@@ -1,11 +1,11 @@
 from os.path import join
 
-from .base import ResourceMapping
+from .base import Deletable, Mapping, Mutable, Resource
 from .event import Event, Superevent
 from .util import field_collection
 
 
-class BaseEvents(ResourceMapping):
+class BaseEvents(Deletable, Mapping, Mutable, Resource):
 
     def search(self, **kwargs):
         url = self.url

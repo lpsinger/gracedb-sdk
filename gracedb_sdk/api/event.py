@@ -1,6 +1,6 @@
 from os.path import join
 
-from .base import Deletable, Resource
+from .base import Deletable, Mutable, Resource
 from .files import Files
 from .voevents import EventVOEvents, SupereventVOEvents
 from .logs import EventLogs, SupereventLogs
@@ -80,6 +80,6 @@ class Superevent(BaseEvent):
         self.session.post(url, data=data)
 
 
-class SupereventEventList(Deletable):
+class SupereventEventList(Deletable, Mutable, Resource):
 
     path = 'events/'

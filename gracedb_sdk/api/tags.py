@@ -1,4 +1,4 @@
-from .base import Deletable
+from .base import Deletable, Mutable, Resource
 
 
 # FIXME: events have a 'tag/' resource whereas superevents have 'tags/'.
@@ -7,7 +7,7 @@ from .base import Deletable
 #
 # FIXME: GraceDB expects different HTTP methods to write tags for events vs.
 # superevents!
-class BaseTags(Deletable):
+class BaseTags(Deletable, Mutable, Resource):
 
     def get(self, **kwargs):
         return super().get(**kwargs)['tags']
