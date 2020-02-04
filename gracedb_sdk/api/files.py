@@ -1,4 +1,4 @@
-from .base import ChildResource, ResourceMap
+from .base import ChildResource, HasChildResources
 
 
 class File(ChildResource):
@@ -7,7 +7,7 @@ class File(ChildResource):
         return self.session.get(self.url, stream=True).raw
 
 
-class Files(ResourceMap):
+class Files(HasChildResources):
 
     path = 'files/'
-    mapped_class = File
+    child_class = File

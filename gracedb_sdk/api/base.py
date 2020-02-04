@@ -33,10 +33,10 @@ class Deletable(Resource):
         self.session.delete(join(self.url, str(key)))
 
 
-class ResourceMap(Resource):
+class HasChildResources(Resource):
 
     def __getitem__(self, key):
-        return self.mapped_class(self, key)
+        return self.child_class(self, key)
 
 
 class ChildResource(Resource):
