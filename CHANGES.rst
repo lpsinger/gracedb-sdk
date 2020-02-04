@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.3 (unreleased)
+0.1.0 (2020-02-04)
 ------------------
 
 -   Skip unit tests if the user's X.509 certificate is not authorized for
