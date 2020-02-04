@@ -1,11 +1,11 @@
 from os.path import join
 
-from .base import HasChildResource
+from .base import ResourceMapping
 from .event import Event, Superevent
 from .util import field_collection
 
 
-class BaseEvents(HasChildResource):
+class BaseEvents(ResourceMapping):
 
     def search(self, **kwargs):
         url = self.url
@@ -19,7 +19,7 @@ class BaseEvents(HasChildResource):
 class Events(BaseEvents):
 
     path = 'events/'
-    child_class = Event
+    mapped_class = Event
 
     def __getitem__(self, key):
         """Make the API forgiving of mixing up events and superevents."""
@@ -42,7 +42,7 @@ SUPEREVENT_CATEGORIES = {'M': 'M', 'T': 'T', 'G': 'P'}
 class Superevents(BaseEvents):
 
     path = 'superevents/'
-    child_class = Superevent
+    mapped_class = Superevent
 
     def __getitem__(self, key):
         """Make the API forgiving of mixing up events and superevents."""

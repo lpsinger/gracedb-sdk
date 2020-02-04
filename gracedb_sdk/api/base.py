@@ -36,7 +36,7 @@ class Deletable(Resource):
         self.session.delete(join(self.url, str(key)))
 
 
-class HasChildResource(Resource):
+class ResourceMapping(Resource):
 
     def __getitem__(self, key):
-        return self.child_class(self, key)
+        return self.mapped_class(self, key)
