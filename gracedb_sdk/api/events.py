@@ -10,7 +10,7 @@ class BaseEvents(HasChildResources):
     def search(self, **kwargs):
         url = self.url
         while url:
-            response = self.client.get(url, params=kwargs).json()
+            response = self.session.get(url, params=kwargs).json()
             url = response.get('links', {}).get('next')
             kwargs = None
             yield from response.get(self.path.strip('/'), [])
@@ -65,4 +65,4 @@ class Superevents(BaseEvents):
             # FIXME: GraceDB does not support 'put' here, only 'patch'!
             # This is inconsistent between events and superevents.
             url = join(self.url, superevent_id) + '/'
-            self.client.patch(url, data=data)
+            self.session.patch(url, data=data)

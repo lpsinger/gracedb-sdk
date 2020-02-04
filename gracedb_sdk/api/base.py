@@ -4,7 +4,7 @@ from os.path import join
 class Resource:
 
     def __init__(self, parent=None):
-        self.client = parent.client
+        self.session = parent.session
         self.parent = parent
 
     @property
@@ -13,9 +13,9 @@ class Resource:
 
     def create_or_update(self, key, **kwargs):
         if key is None:
-            return self.client.post(self.url, **kwargs).json()
+            return self.session.post(self.url, **kwargs).json()
         else:
-            self.client.put(join(self.url, str(key)), **kwargs)
+            self.session.put(join(self.url, str(key)), **kwargs)
 
     def create(self, **kwargs):
         return self.create_or_update(None, **kwargs)
@@ -24,13 +24,13 @@ class Resource:
         return self.create_or_update(key, **kwargs)
 
     def get(self, **kwargs):
-        return self.client.get(self.url, **kwargs).json()
+        return self.session.get(self.url, **kwargs).json()
 
 
 class Deletable(Resource):
 
     def delete(self, key):
-        self.client.delete(join(self.url, str(key)))
+        self.session.delete(join(self.url, str(key)))
 
 
 class HasChildResources(Resource):

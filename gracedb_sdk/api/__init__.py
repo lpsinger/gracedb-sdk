@@ -4,9 +4,8 @@ from .events import Events, Superevents
 
 class API:
 
-    def __init__(self, url, *args, **kwargs):
-        super().__init__(url, *args, **kwargs)
+    def __init__(self, url, session):
         self.url = url
-        self.client = self
+        self.session = session
         self.events = Events(self)
         self.superevents = Superevents(self)

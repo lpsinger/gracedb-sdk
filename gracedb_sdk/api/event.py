@@ -54,11 +54,11 @@ class Superevent(BaseEvent):
 
     def _modify_permissions(self, action):
         url = join(self.url, 'permissions/modify/')
-        self.client.post(url, data={'action': action})
+        self.session.post(url, data={'action': action})
 
     def is_exposed(self):
         url = join(self.url, 'permissions/')
-        result = self.client.get(url).json()
+        result = self.session.get(url).json()
         for row in result['permissions']:
             if row['group'] == 'public_users' \
                     and row['permission'] == 'view_superevent':
@@ -80,7 +80,7 @@ class Superevent(BaseEvent):
         else:
             data['signoff_type'] = signoff_type
             data['instrument'] = ''
-        self.client.post(url, data=data)
+        self.session.post(url, data=data)
 
 
 class SupereventEventList(Deletable):

@@ -9,7 +9,7 @@ del get_versions
 __all__ = ('Client',)
 
 
-class Client(API, Session):
+class Client(API):
     """GraceDB client session.
 
     Parameters
@@ -118,4 +118,13 @@ class Client(API, Session):
     """  # noqa: E501
 
     def __init__(self, url='https://gracedb.ligo.org/api/', *args, **kwargs):
-        super().__init__(url, *args, **kwargs)
+        super().__init__(url, Session(url=url, *args, **kwargs))
+
+    def close(self):
+        self.session.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
