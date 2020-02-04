@@ -1,11 +1,11 @@
 from os.path import join
 
-from .base import HasChildResources
+from .base import HasChildResource
 from .event import Event, Superevent
 from .util import field_collection
 
 
-class BaseEvents(HasChildResources):
+class BaseEvents(HasChildResource):
 
     def search(self, **kwargs):
         url = self.url

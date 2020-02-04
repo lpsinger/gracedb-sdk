@@ -1,6 +1,6 @@
 from os.path import join
 
-from .base import Deletable, ChildResource
+from .base import Deletable, Resource
 from .files import Files
 from .voevents import EventVOEvents, SupereventVOEvents
 from .logs import EventLogs, SupereventLogs
@@ -10,7 +10,7 @@ from .labels import EventLabels, SupereventLabels
 # FIXME: events have a 'log/' resource whereas superevents have 'logs/'.
 # Combine BaseEvent, Event, and Superevent into a single Event class
 # once this inconsistency has been fixed.
-class BaseEvent(ChildResource):
+class BaseEvent(Resource):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,12 +39,9 @@ class Superevent(BaseEvent):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._events = SupereventEventList(self)
-
-    # FIXME: GraceDB requires a random / for these URLs!
-    # This is inconsistent between events and superevents.
-    @property
-    def url(self):
-        return super().url + '/'
+        # FIXME: GraceDB requires a random / for these URLs!
+        # This is inconsistent between events and superevents.
+        self.url += '/'
 
     def add(self, event_id):
         self._events.create(data={'event': event_id})

@@ -7,9 +7,8 @@ from .tags import EventTags, SupereventTags
 # once this inconsistency has been fixed.
 class BaseLog(Resource):
 
-    def __init__(self, parent, path):
-        super().__init__(parent)
-        self.path = path
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.tags = self.tags_class(self)
 
 

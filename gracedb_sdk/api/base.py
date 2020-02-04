@@ -3,13 +3,16 @@ from os.path import join
 
 class Resource:
 
-    def __init__(self, parent=None):
+    path = None
+
+    def __init__(self, parent=None, path=None):
         self.session = parent.session
         self.parent = parent
-
-    @property
-    def url(self):
-        return join(self.parent.url, str(self.path))
+        self.url = self.parent.url
+        if path is None:
+            path = self.path
+        if path is not None:
+            self.url = join(self.url, str(path))
 
     def create_or_update(self, key, **kwargs):
         if key is None:
@@ -33,14 +36,7 @@ class Deletable(Resource):
         self.session.delete(join(self.url, str(key)))
 
 
-class HasChildResources(Resource):
+class HasChildResource(Resource):
 
     def __getitem__(self, key):
         return self.child_class(self, key)
-
-
-class ChildResource(Resource):
-
-    def __init__(self, parent, path):
-        super().__init__(parent)
-        self.path = path

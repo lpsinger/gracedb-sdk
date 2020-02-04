@@ -1,13 +1,13 @@
-from .base import ChildResource, HasChildResources
+from .base import HasChildResource, Resource
 
 
-class File(ChildResource):
+class File(Resource):
 
     def get(self):
         return self.session.get(self.url, stream=True).raw
 
 
-class Files(HasChildResources):
+class Files(HasChildResource):
 
     path = 'files/'
     child_class = File
