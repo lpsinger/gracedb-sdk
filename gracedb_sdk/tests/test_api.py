@@ -18,15 +18,17 @@ def coinc_xml_bytes():
     return get_coinc_xml_bytes()
 
 
-@pytest.fixture(scope='module')
-def client():
+def authenticated_client_or_skip():
+    """Return an authenticated client, or skip the test."""
     try:
-        client = Client('https://gracedb-test.ligo.org/api/',
-                        fail_if_noauth=True)
+        return Client('https://gracedb-test.ligo.org/api/',
+                      fail_if_noauth=True)
     except ValueError:
         pytest.skip('no GraceDB credentials found')
 
-    # Do test upload to see if we have permissions.
+
+def skip_if_not_authorized(client):
+    """Do test upload to see if we have permissions."""
     try:
         event = client.events.create(
             filename='coinc.xml', filecontents=get_coinc_xml_bytes(),
@@ -42,9 +44,12 @@ def client():
         else:
             raise
 
-    yield client
 
-    client.close()
+@pytest.fixture(scope='module')
+def client():
+    with authenticated_client_or_skip() as client:
+        skip_if_not_authorized(client)
+        yield client
 
 
 @pytest.mark.parametrize('labels_in,labels_out', [
