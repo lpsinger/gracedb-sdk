@@ -65,4 +65,4 @@ class Superevents(BaseEvents):
             # FIXME: GraceDB does not support 'put' here, only 'patch'!
             # This is inconsistent between events and superevents.
             url = join(self.url, superevent_id) + '/'
-            self.session.patch(url, data=data)
+            return self.session.patch(url, data=data)

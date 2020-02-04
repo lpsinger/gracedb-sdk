@@ -30,7 +30,7 @@ class Mutable:
         if key is None:
             return self.session.post(self.url, **kwargs).json()
         else:
-            self.session.put(join(self.url, str(key)), **kwargs)
+            return self.session.put(join(self.url, str(key)), **kwargs)
 
     def create(self, **kwargs):
         return self.create_or_update(None, **kwargs)
