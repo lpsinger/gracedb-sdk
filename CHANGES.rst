@@ -9,6 +9,9 @@ Changelog
 
 -   Track rename of ligo-requests to requests-gracedb.
 
+-   Address all feedback from Pierre Chanial's code review:
+    https://git.ligo.org/emfollow/gracedb-sdk/issues/2
+
 0.0.2 (2019-12-12)
 ------------------
 
