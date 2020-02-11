@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.1 (unreleased)
+0.1.1 (2020-02-11)
 ------------------
 
 -   Fix Python string formatting syntax so that the package is Python 3.5
