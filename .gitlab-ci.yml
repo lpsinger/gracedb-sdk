@@ -26,7 +26,7 @@ bdist:
     paths:
       - '*.whl'
 
-test:
+.test: &test:
   image: python:slim
   stage: test
   before_script:  # Install robot keytab for integration tests
@@ -49,6 +49,22 @@ test:
     reports:
       junit: junit.xml
 
+test/3.5:
+  image: python:3.5-slim
+  <<: *test
+
+test/3.6:
+  image: python:3.6-slim
+  <<: *test
+
+test/3.7:
+  image: python:3.7-slim
+  <<: *test
+
+test/3.8:
+  image: python:3.8-slim
+  <<: *test
+
 pages:
   stage: deploy
   script:
@@ -60,7 +76,7 @@ pages:
   only:
     - master
   dependencies:
-    - test
+    - test/3.8
 
 # SCCB request
 sccb:
