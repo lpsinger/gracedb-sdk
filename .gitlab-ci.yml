@@ -27,7 +27,6 @@ bdist:
       - '*.whl'
 
 .test: &test:
-  image: python:slim
   stage: test
   before_script:  # Install robot keytab for integration tests
     - apt-get update && apt-get install -y curl krb5-user xsltproc
