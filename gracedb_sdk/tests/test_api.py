@@ -193,7 +193,7 @@ def events_voevents_create(client, events_create):
 
 def test_events_voevents_create(client, events_create, events_voevents_create):
     event_id = events_create['graceid']
-    filename = f'{event_id}-1-Preliminary.xml'
+    filename = '{}-1-Preliminary.xml'.format(event_id)
     assert events_voevents_create['filename'] == filename
 
 
@@ -201,7 +201,7 @@ def test_events_voevents_get(client, events_create, events_voevents_create):
     event_id = events_create['graceid']
     result = client.events[event_id].voevents.get()
     assert len(result) == 1
-    filename = f'{event_id}-1-Preliminary.xml'
+    filename = '{}-1-Preliminary.xml'.format(event_id)
     assert result[0]['filename'] == filename
 
 
@@ -228,7 +228,7 @@ def test_superevents_get(client, superevents_create):
 
 def test_superevents_search(client, superevents_create):
     superevent_id = superevents_create['superevent_id']
-    query = f'{superevent_id} category: Test'
+    query = '{} category: Test'.format(superevent_id)
     result = list(client.superevents.search(query=query))
     assert [superevents_create] == result
 
@@ -386,7 +386,7 @@ def superevents_voevents_create(client, superevents_create):
 def test_superevents_voevents_create(client, superevents_create,
                                      superevents_voevents_create):
     superevent_id = superevents_create['superevent_id']
-    filename = f'{superevent_id}-1-Preliminary.xml'
+    filename = '{}-1-Preliminary.xml'.format(superevent_id)
     assert superevents_voevents_create['filename'] == filename
 
 
@@ -394,7 +394,7 @@ def test_superevents_voevents_get(client, superevents_create,
                                   superevents_voevents_create):
     superevent_id = superevents_create['superevent_id']
     result = client.superevents[superevent_id].voevents.get()
-    filename = f'{superevent_id}-1-Preliminary.xml'
+    filename = '{}-1-Preliminary.xml'.format(superevent_id)
     assert len(result) == 1
     assert result[0]['filename'] == filename
 
