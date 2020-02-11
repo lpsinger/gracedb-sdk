@@ -4,7 +4,8 @@ Changelog
 0.1.1 (unreleased)
 ------------------
 
--   No changes yet.
+-   Fix Python string formatting syntax so that the package is Python 3.5
+    compatible.
 
 0.1.0 (2020-02-04)
 ------------------
