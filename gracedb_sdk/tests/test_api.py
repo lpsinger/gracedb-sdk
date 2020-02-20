@@ -253,6 +253,19 @@ def test_superevents_update_preferred_event_none(client, superevents_create):
     assert result['t_end'] == 789
 
 
+def test_superevents_update_preferred_event_same(client, events_create,
+                                                 superevents_create):
+    # Check that passing current preferred event is OK
+    superevent_id = superevents_create['superevent_id']
+    event_id = events_create['graceid']
+    client.superevents.update(superevent_id, preferred_event=event_id,
+                              t_start=123, t_0=456, t_end=789)
+    result = client.superevents[superevent_id].get()
+    assert result['t_start'] == 123
+    assert result['t_0'] == 456
+    assert result['t_end'] == 789
+
+
 @pytest.fixture
 def events_create_2(client, coinc_xml_bytes):
     return client.events.create(
