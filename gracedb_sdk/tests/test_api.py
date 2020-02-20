@@ -287,6 +287,27 @@ def test_superevents_add(client, superevents_add, superevents_create,
     superevent_id = superevents_create['superevent_id']
     result = client.superevents[superevent_id].get()
     assert set(result['gw_events']) == {event_id, event_id_2}
+    assert result['preferred_event'] == event_id
+
+
+@pytest.fixture
+def superevents_update_change_preferred_event(client, superevents_create,
+                                              events_create_2):
+    event_id_2 = events_create_2['graceid']
+    superevent_id = superevents_create['superevent_id']
+    client.superevents.update(superevent_id, preferred_event=event_id_2)
+
+
+def test_superevents_update_change_preferred_event(
+        client, superevents_add, superevents_create,
+        superevents_update_change_preferred_event, events_create,
+        events_create_2):
+    event_id = events_create['graceid']
+    event_id_2 = events_create_2['graceid']
+    superevent_id = superevents_create['superevent_id']
+    result = client.superevents[superevent_id].get()
+    assert set(result['gw_events']) == {event_id, event_id_2}
+    assert result['preferred_event'] == event_id_2
 
 
 def test_superevents_remove(client, superevents_add, superevents_create,
