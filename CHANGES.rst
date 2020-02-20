@@ -4,7 +4,9 @@ Changelog
 0.1.2 (unreleased)
 ------------------
 
--   No changes yet.
+-   Fix an argument parsing bug: ``client.superevents.update()`` failed to
+    treat the keyword argument ``preferred_event=None`` the same as omission of
+    the keyword argument.
 
 0.1.1 (2020-02-11)
 ------------------

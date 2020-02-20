@@ -242,6 +242,17 @@ def test_superevents_update(client, superevents_create):
     assert result['t_end'] == 789
 
 
+def test_superevents_update_preferred_event_none(client, superevents_create):
+    # Regression test for https://git.ligo.org/emfollow/gracedb-sdk/issues/13
+    superevent_id = superevents_create['superevent_id']
+    client.superevents.update(superevent_id, preferred_event=None,
+                              t_start=123, t_0=456, t_end=789)
+    result = client.superevents[superevent_id].get()
+    assert result['t_start'] == 123
+    assert result['t_0'] == 456
+    assert result['t_end'] == 789
+
+
 @pytest.fixture
 def events_create_2(client, coinc_xml_bytes):
     return client.events.create(

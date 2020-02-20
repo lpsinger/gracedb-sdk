@@ -56,9 +56,13 @@ class Superevents(BaseEvents):
         data = (*field_collection('events', events),
                 *field_collection('labels', labels),
                 *kwargs.items())
-        if 'preferred_event' in kwargs:
-            category = SUPEREVENT_CATEGORIES[kwargs['preferred_event'][0]]
+
+        # Automatically guess category based on prefix of preferred event
+        preferred_event = kwargs.get('preferred_event')
+        if preferred_event is not None:
+            category = SUPEREVENT_CATEGORIES[preferred_event[0]]
             data += (('category', category),)
+
         if superevent_id is None:
             return super().create_or_update(superevent_id, data=data)
         else:
