@@ -47,6 +47,9 @@ bdist:
       - htmlcov/
     reports:
       junit: junit.xml
+  # Do not run more than one unit test job at once, because GraceDB has race
+  # conditions when multiple clients are creating superevents.
+  resource_group: gracedb-test.ligo.org
 
 test/3.5:
   image: python:3.5-slim
