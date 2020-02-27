@@ -18,7 +18,7 @@ from os.path import join
 
 from .base import Deletable, Mapping, Mutable, Resource
 from .event import Event, Superevent
-from .util import field_collection
+from .util import field_collection, str_or_collection
 
 
 class BaseEvents(Deletable, Mapping, Mutable, Resource):
@@ -69,20 +69,25 @@ class Superevents(BaseEvents):
 
     def create_or_update(self, superevent_id, *,
                          events=None, labels=None, **kwargs):
-        data = (*field_collection('events', events),
-                *field_collection('labels', labels),
-                *kwargs.items())
+        data = {key: value for key, value in kwargs.items()
+                if value is not None}
+        if events:
+            data['events'] = str_or_collection(events)
+        if labels:
+            data['labels'] = str_or_collection(labels)
 
         # Automatically guess category based on prefix of preferred event
         preferred_event = kwargs.get('preferred_event')
         if preferred_event is not None:
             category = SUPEREVENT_CATEGORIES[preferred_event[0]]
-            data += (('category', category),)
+            data['category'] = category
 
+        # FIXME: superevent creation requests must be JSON-encoded rather than
+        # form-encoded due to https://git.ligo.org/lscsoft/gracedb/issues/195
         if superevent_id is None:
-            return super().create_or_update(superevent_id, data=data)
+            return super().create_or_update(superevent_id, json=data)
         else:
             # FIXME: GraceDB does not support 'put' here, only 'patch'!
             # This is inconsistent between events and superevents.
             url = join(self.url, superevent_id) + '/'
-            return self.session.patch(url, data=data)
+            return self.session.patch(url, json=data)

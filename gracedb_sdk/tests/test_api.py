@@ -51,7 +51,10 @@ def skip_if_not_authorized(client):
             group='Test', pipeline='gstlal')
         graceid = event['graceid']
         superevent = client.superevents.create(
-            preferred_event=graceid, t_0=1e9, t_start=1e9, t_end=1e9)
+            preferred_event=graceid,
+            t_start=1000000000.12345678,
+            t_0=1000000001.12345678,
+            t_end=1000000002.12345678)
         superevent_id = superevent['superevent_id']
         client.superevents[superevent_id].expose()
     except HTTPError as e:
@@ -225,15 +228,18 @@ def test_events_voevents_get(client, events_create, events_voevents_create):
 def superevents_create(client, events_create):
     event_id = events_create['graceid']
     return client.superevents.create(
-        preferred_event=event_id, t_0=1e9, t_start=1e9, t_end=1e9)
+        preferred_event=event_id,
+        t_start=1000000000.12345678,
+        t_0=1000000001.12345678,
+        t_end=1000000002.12345678)
 
 
 def test_superevents_create(client, events_create, superevents_create):
     event_id = events_create['graceid']
     assert superevents_create['preferred_event'] == event_id
-    assert superevents_create['t_start'] == 1e9
-    assert superevents_create['t_0'] == 1e9
-    assert superevents_create['t_end'] == 1e9
+    assert superevents_create['t_start'] == 1000000000.123457
+    assert superevents_create['t_0'] == 1000000001.123457
+    assert superevents_create['t_end'] == 1000000002.123457
 
 
 def test_superevents_get(client, superevents_create):

@@ -4,7 +4,11 @@ Changelog
 0.1.3 (unreleased)
 ------------------
 
--   No changes yet.
+-   Work around a bug in GraceDB where normalization of floating-point GPS
+    times to fixed-precision decimal representation is applied to JSON-encoded
+    requests but not form-encoded requests. This bug caused superevent API
+    requests with GPS times specified with more than 6 decimal places to fail.
+    See https://git.ligo.org/lscsoft/gracedb/issues/195.
 
 0.1.2 (2020-02-20)
 ------------------
