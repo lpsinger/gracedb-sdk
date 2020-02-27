@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.3 (unreleased)
+0.1.4 (2020-02-27)
 ------------------
 
 -   Work around a bug in GraceDB where normalization of floating-point GPS
