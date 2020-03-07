@@ -207,12 +207,12 @@ def test_events_logs_tags_delete(client, events_create,
 @pytest.fixture
 def events_voevents_create(client, events_create):
     event_id = events_create['graceid']
-    return client.events[event_id].voevents.create(voevent_type='preliminary')
+    return client.events[event_id].voevents.create(voevent_type='earlywarning')
 
 
 def test_events_voevents_create(client, events_create, events_voevents_create):
     event_id = events_create['graceid']
-    filename = '{}-1-Preliminary.xml'.format(event_id)
+    filename = '{}-1-EarlyWarning.xml'.format(event_id)
     assert events_voevents_create['filename'] == filename
 
 
@@ -220,7 +220,7 @@ def test_events_voevents_get(client, events_create, events_voevents_create):
     event_id = events_create['graceid']
     result = client.events[event_id].voevents.get()
     assert len(result) == 1
-    filename = '{}-1-Preliminary.xml'.format(event_id)
+    filename = '{}-1-EarlyWarning.xml'.format(event_id)
     assert result[0]['filename'] == filename
 
 
@@ -447,13 +447,13 @@ def test_superevents_logs_tags_delete(client, superevents_create,
 def superevents_voevents_create(client, superevents_create):
     superevent_id = superevents_create['superevent_id']
     return client.superevents[superevent_id].voevents.create(
-        voevent_type='preliminary')
+        voevent_type='earlywarning')
 
 
 def test_superevents_voevents_create(client, superevents_create,
                                      superevents_voevents_create):
     superevent_id = superevents_create['superevent_id']
-    filename = '{}-1-Preliminary.xml'.format(superevent_id)
+    filename = '{}-1-EarlyWarning.xml'.format(superevent_id)
     assert superevents_voevents_create['filename'] == filename
 
 
@@ -461,7 +461,7 @@ def test_superevents_voevents_get(client, superevents_create,
                                   superevents_voevents_create):
     superevent_id = superevents_create['superevent_id']
     result = client.superevents[superevent_id].voevents.get()
-    filename = '{}-1-Preliminary.xml'.format(superevent_id)
+    filename = '{}-1-EarlyWarning.xml'.format(superevent_id)
     assert len(result) == 1
     assert result[0]['filename'] == filename
 

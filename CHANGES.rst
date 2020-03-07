@@ -4,7 +4,7 @@ Changelog
 0.1.5 (unreleased)
 ------------------
 
--   No changes yet.
+-   Add new VOEvent type ``earlywarning``.
 
 0.1.4 (2020-02-27)
 ------------------

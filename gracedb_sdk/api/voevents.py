@@ -17,7 +17,8 @@
 from .base import Mutable, Resource
 
 
-VOEVENT_TYPES = {'preliminary': 'PR',
+VOEVENT_TYPES = {'earlywarning': 'EW',
+                 'preliminary': 'PR',
                  'retraction': 'RE',
                  'update': 'UP',
                  'initial': 'IN'}
