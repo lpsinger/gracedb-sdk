@@ -20,7 +20,9 @@ from .base import Mapping, Resource
 class File(Resource):
 
     def get(self):
-        return self.session.get(self.url, stream=True).raw
+        raw = self.session.get(self.url, stream=True).raw
+        raw.decode_content = True
+        return raw
 
 
 class Files(Mapping, Resource):
