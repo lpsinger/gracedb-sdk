@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.6 (unreleased)
+0.1.6 (2020-03-18)
 ------------------
 
 -   Make sure that the file-like objects returned by the
