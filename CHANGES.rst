@@ -5,9 +5,9 @@ Changelog
 ------------------
 
 -   Make sure that the file-like objects returned by the
-    `client.events[event_id].files[filename].get()` and
-    `client.superevents[superevent_id].files[filename].get()` methods have been
-    decompressed if it was sent using HTTP compression.
+    ``client.events[event_id].files[filename].get()`` and
+    ``client.superevents[superevent_id].files[filename].get()`` methods have
+    been decompressed if they were sent using HTTP compression.
 
 0.1.5 (2020-03-07)
 ------------------
