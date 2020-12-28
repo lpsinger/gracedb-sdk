@@ -4,7 +4,7 @@ Changelog
 0.1.6 (unreleased)
 ------------------
 
--   No changes yet.
+-   Drop support for Python 3.5, which has reached end of life.
 
 0.1.6 (2020-03-18)
 ------------------

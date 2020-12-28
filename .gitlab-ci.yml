@@ -51,10 +51,6 @@ bdist:
   # conditions when multiple clients are creating superevents.
   resource_group: gracedb-test.ligo.org
 
-test/3.5:
-  image: python:3.5-slim
-  <<: *test
-
 test/3.6:
   image: python:3.6-slim
   <<: *test
