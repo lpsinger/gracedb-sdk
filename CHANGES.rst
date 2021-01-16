@@ -6,6 +6,8 @@ Changelog
 
 -   Drop support for Python 3.5, which has reached end of life.
 
+-   Add support for Python 3.9.
+
 0.1.6 (2020-03-18)
 ------------------
 
